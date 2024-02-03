@@ -1,0 +1,51 @@
+{% extends "gallery_4_laba/base.html" %}
+{% block content %}
+<div class="gallery_block">
+    {% for cat in cats %}
+    <div class="block">
+        <a data-fancybox="gallery" href="{{ cat.photo_url }}" data-caption="{{ cat.description }}">
+            <img src="{{ cat.photo_url }}">
+        </a>
+        <div>
+            <button class="like" type="submit" name="{{ cat.id}}" id="{{ cat.id}}">
+                {{ cat.like }}
+            </button>
+        </div>
+    </div>
+    {% endfor %}
+    <script>
+
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    $('.like').click(function () {
+        var cat_id = $(this).attr("name");
+        console.log(cat_id);
+        var csrftoken = getCookie('csrftoken');
+        $.ajax({
+            url: "/like/",
+            type: "POST",
+            data: { 'cat_id': cat_id},
+            headers: { "X-CSRFToken": csrftoken },
+            dataType: 'json',
+            success: function (data) {
+                $("#" + cat_id).html(data.count_like)
+            }
+        });
+    });
+    </script>
+</div>
+{% endblock content %}
