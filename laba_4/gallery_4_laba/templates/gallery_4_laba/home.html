@@ -1,4 +1,9 @@
 {% extends "gallery_4_laba/base.html" %}
 {% block content %}
-<p class="main_text">котики</p>
+<!-- <p class="main_text">котики</p> -->
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Upload</button>
+</form>
 {% endblock content %}    
