@@ -1,7 +1,7 @@
 from django import forms
-from .models import Cat
+from .models import Product
 
 class ImageForm(forms.ModelForm):
     class Meta:
-        model = Cat
-        fields = ['photo', 'description']
+        model = Product
+        fields = '__all__'

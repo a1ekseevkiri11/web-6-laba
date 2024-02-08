@@ -1,3 +1,3 @@
 from django.contrib import admin
-from .models import Cat
-admin.site.register(Cat)
+from .models import Product
+admin.site.register(Product)
