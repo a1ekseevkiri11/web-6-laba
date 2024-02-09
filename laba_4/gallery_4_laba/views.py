@@ -16,8 +16,8 @@ def home(request):
 
 
 def gallery(request):
-	cat_list = Product.objects.all()
-	context = {'products': cat_list}
+	products_list = Product.objects.all()
+	context = {'products': products_list}
 	return render(request, 'gallery_4_laba/gallery.html', context)
 
 def delete(request, id):
@@ -31,7 +31,7 @@ def delete(request, id):
 def edit(request, id):
 	try:
 		product = Product.objects.get(id=id)
-		form = ImageForm(request.POST, instance=product)
+		form = ImageForm(request.POST)
 		if form.is_valid():
 			form.save()
 			return HttpResponseRedirect("/gallery")
