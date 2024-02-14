@@ -13,3 +13,8 @@ class Product(models.Model):
         
     def __str__(self):
         return self.name
+
+
+class Captcha(models.Model):
+    key = models.CharField(max_length=50, unique=True)
+    answer = models.CharField(max_length=10)

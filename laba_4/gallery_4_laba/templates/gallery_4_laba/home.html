@@ -3,7 +3,13 @@
 <div style="min-height: 85vh; display: flex; justify-content: center; align-items: center;">
     <form method="post" enctype="multipart/form-data" >
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ product_form.as_p }}
+        <p>{{ expression }}</p>
+        {{ captcha_form.answer }}
+        {% if error_message %}
+            <p style="color: red;">{{ error_message }}</p>
+        {% endif %}
+        {{ captcha_form.key }}
         <button type="submit">Upload</button>
     </form>
 </div>
